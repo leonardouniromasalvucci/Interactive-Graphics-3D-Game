@@ -613,7 +613,7 @@ var animate = function(){
     sphere_explo.geometry.verticesNeedUpdate = true; 
     sphere_explo.geometry.computeVertexNormals(); 
     sphere_explo.scale.set(start_explo,start_explo,start_explo);
-    start_explo+=0.009;
+    start_explo+=0.09;
 
     setTimeout(function(){ 
       scene.remove(mesh);
@@ -638,7 +638,7 @@ var animate = function(){
     sphere_explo.geometry.verticesNeedUpdate = true; 
     sphere_explo.geometry.computeVertexNormals(); 
     sphere_explo.scale.set(start_explo1,start_explo1,start_explo1);
-    start_explo1+=0.009;
+    start_explo1+=0.09;
    
     setTimeout(function(){ 
       scene.remove(bob.model);
