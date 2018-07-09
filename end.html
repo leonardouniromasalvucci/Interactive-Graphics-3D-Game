@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Threejs Project</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">       
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+			}
+			#bb:hover{
+				background-color: #d1d1d1;
+			}
+		</style>
+	</head>
+	<body>
+		<audio id="over" style="display: none;" src="sounds/over.mp3" controls></audio>
+		<div id="containerss"></div>
+		<button type="button" class="btn" id="bb" style="display:none;left:46%;top:20%;position: absolute;color:#8B0000" onclick="window.location.href='first.html'">Play again</button>	  
+
+		<script src="libraries/three.js"></script>
+		<script src="libraries/GeometryUtils.js"></script>
+
+		<script src="libraries/Detector.js"></script>
+		<script src="libraries/stats.min.js"></script>
+		
+
+		<script>
+			if(!window.WebGLRenderingContext) {
+                alert("webgl not supported, visit http://get.webgl.org");
+            }	   
+
+			var end=false;
+			var container, camera, cameraTarget, scene, renderer;
+			var group, textMesh1, textMesh2, textGeo, materials;
+
+			var height = 20,
+				size = 50,
+				hover = 30,
+				curveSegments = 4,
+				bevelThickness = 2,
+				bevelSize = 1.5,
+				bevelSegments = 3,
+				bevelEnabled = true,
+				
+                fontName = "gentilis", // helvetiker, optimer, gentilis, droid sans, droid serif
+				fontWeight = "bold"; // normal bold
+
+			
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 30, window.innerWidth / window.innerHeight, 1, 1500 );
+				camera.position.set( 0, 400, 700 );
+
+				cameraTarget = new THREE.Vector3( 0, 150, 0 );
+
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0x000000 );
+				scene.fog = new THREE.Fog( 0x000000, 250, 1400 );
+
+				var dirLight = new THREE.DirectionalLight( 0xffffff, 0.125 );
+				dirLight.position.set( 0, 0, 1 ).normalize();
+				scene.add( dirLight );
+
+				var pointLight = new THREE.PointLight( 0xffffff, 1.5 );
+				pointLight.position.set( 0, 100, 90 );
+				scene.add( pointLight );
+
+				var hash = document.location.hash.substr( 1 );
+
+				materials = [
+					new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } ), 
+					new THREE.MeshPhongMaterial( { color: 0xffffff } ) 
+				];
+
+				group = new THREE.Group();
+				group.position.y = 100;
+
+				scene.add( group );
+
+				loadFont();
+
+				var plane = new THREE.Mesh(
+					new THREE.PlaneBufferGeometry( 10000, 10000 ),
+					new THREE.MeshBasicMaterial( { color: 0xC21212, opacity: 0.5, transparent: true } )
+				);
+				plane.position.y = 100;
+				plane.rotation.x = - Math.PI / 2;
+				scene.add( plane );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				container.appendChild( renderer.domElement );
+			
+				window.addEventListener( 'resize', onWindowResize, false );
+			}
+
+			function onWindowResize() {
+
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			
+
+			function loadFont() {
+
+				var loader = new THREE.FontLoader();
+				loader.load( 'model/'+fontName + '_' + fontWeight + '.typeface.json', function ( response ) {
+					font = response;
+					createText();
+				} );
+			}
+
+			function createText() {
+
+				textGeo = new THREE.TextGeometry( "GAME OVER", {
+					font: font,
+					size: size,
+					height: height,
+					curveSegments: curveSegments,
+
+					bevelThickness: bevelThickness,
+					bevelSize: bevelSize,
+					bevelEnabled: bevelEnabled,
+
+					material: 0,
+					extrudeMaterial: 1
+				});
+
+				textGeo.computeBoundingBox();
+				textGeo.computeVertexNormals();				
+
+				var centerOffset = -0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
+
+				textMesh1 = new THREE.Mesh( textGeo, materials );
+
+				textMesh1.position.x = centerOffset;
+				textMesh1.position.y = hover;
+				group.add( textMesh1 );
+                
+            }
+
+			function animate() {
+				requestAnimationFrame( animate );
+				render();
+            }
+
+			function render() {
+
+				camera.lookAt( cameraTarget );
+				renderer.render( scene, camera );
+                zoom();
+			}
+
+			function addButton(){
+				if(!end){
+                   document.getElementById('over').play();
+                   end=true;
+				}
+				document.getElementById('bb').style.display = 'block';
+    		}
+
+			function zoom(){
+				if(camera.position.z>550 ){
+                     camera.position.z-=3;
+                     textMesh1.rotation.x  += 0.13;
+                }else{
+                    addButton();
+                }
+    		}
+
+		</script>
+	</body>
+</html>

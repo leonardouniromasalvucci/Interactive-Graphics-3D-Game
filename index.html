@@ -1,9 +1,219 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Index</title>
+	<title>Save The Earth</title>
+	<style>
+	body{
+		margin:0;
+		background-color: black;
+	}
+	.box{
+		width:100%;height:100%;
+		margin: 0 auto;
+	}
+	#testo{
+        width: 100%; 
+		color:  #FDF4E3;
+        font-size: 240%;
+        font-weight: bold;        
+        text-align: center;
+        margin: 0 auto;
+        margin-top:6%;
+	}
+	#testo1{      
+		color: #FFFFFF;
+        font-size: 90%;    
+   	}
+	#testo2{      
+		color: #FFFFFF;
+        font-size: 95%;
+        font-weight: bold;      
+        font-style: italic;
+	}
+
+	.box2{
+		width:28%;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 6%;
+	}
+
+	.box3{
+		width:100%;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 18%;
+	}
+
+	.button1{
+		border:1px solid #FDF4E3;
+		border-radius: 10px;
+		width:150px;
+		color:white;
+		float:left;
+        text-align: center;
+        font-weight: bold;
+        height:60px;
+        cursor:pointer;
+        float: left;
+	}
+	#txt{
+		 font-family: "Times New Roman", Times, serif;
+		 font-style: italic;
+		 font-size: 20px;
+		 color: #D7D7D7;
+	}
+
+	.button2{
+		border:1px solid  #FDF4E3;
+		border-radius: 10px;
+		color:white;
+		width:150px;
+		text-align: center;
+		font-weight: bold;
+		height:60px;
+		cursor:pointer;
+		float: right;
+	}
+	.button1:hover{
+		background-color:  #FDF4E3;
+		color:  #7F7679;
+	}
+	.button2:hover{
+		background-color:  #FDF4E3;
+		color: #7F7679;
+	}
+	#txt{
+		color: #7F7679;
+	}
+	#imagex{
+		position: absolute;
+		top:0%;
+		left:65%;
+		transform: rotate(120deg);
+	}
+	#imagex1{
+		position: absolute;
+		top:3%;
+		left:8%;
+		
+	}
+	#imagex2{
+		position: absolute;
+		top:14%;
+		left:20%;
+		transform: rotate(252deg);
+		
+	}
+	#imagex3{
+		position: absolute;
+		top:37%;
+		left:69.2%;
+		width:30.8%;height: 63%;
+		/*transform: rotate(-34deg);*/
+		
+	}
+	#testo4{
+		color:white;
+		width:30%;
+		text-align: center;
+		font-style: italic;
+		margin: 0 auto;
+		margin-top:5%;
+	}
+    
+    #slideSource{ 
+      opacity:0;
+      transition: opacity 10s;
+      -webkit-transition: opacity 10s; /* Safari */
+    }
+
+	</style>
 </head>
-<body>
-	<h1>Test Website</h1>
+<body onload="inizio()">
+  <img id="imagex1" src="images/images33.jpeg">
+  <img id="imagex3" src="images/esd1.png">
+  <div class="box">
+  	<div id="testo">SAFE THE EARTH</div>
+  	<div id="testo4"></div>
+	<div class="box2" id="slideSource">
+		<div class="button1" onclick="window.location.href='first.html'"><p id="txt">START</p></div>
+		<div class="button2" onclick="window.location.href='https://github.com/leonardouniromasalvucci/leonardouniromasalvucci.github.io'"><p id="txt">VIEW REPO</p></div>
+	</div>
+	<div class="box3">
+	    <p id="testo1"></p><p id="testo2">&nbsp;</p> 
+	</div>
+  </div>
+  <audio id="starts" style="display: none;" src="sounds/sounds2.mp3" controls>
+  <script>
+  	var i = 0;
+    function scrivi(){
+        var ID = document.getElementById("testo");
+        ID.insertAdjacentText("beforeEnd", temp.charAt(i));
+        if (i < temp.length - 1){
+           i++;
+           setTimeout("scrivi()", 200);
+        }else{
+           inizio3();
+        }
+    }
+    function inizio(){
+    	document.getElementById('starts').play();
+        var ID = document.getElementById("testo");
+        temp = ID.innerHTML;
+        ID.innerHTML = "";
+        scrivi();       
+    }
+
+    var k = 0;
+    function scrivi1(){
+        var ID = document.getElementById("testo1");
+        ID.insertAdjacentText("beforeEnd", temp.charAt(k));
+        if (k < temp.length - 1){
+           k++;
+           setTimeout("scrivi1()", 200);
+
+        }else{
+        	inizio2();
+        }
+    }
+    function inizio1(){
+        var ID = document.getElementById("testo1");
+        temp = "Realized by";
+        scrivi1();        
+    }
+
+    var s = 0;
+    function scrivi2(){
+        var ID = document.getElementById("testo2");
+        ID.insertAdjacentText("beforeEnd", temp.charAt(s));
+        if (s < temp.length - 1){
+           s++;
+           setTimeout("scrivi2()", 200);
+        }
+    }
+    function inizio2(){
+        var ID = document.getElementById("testo2");
+        temp = "Leonardo Salvucci";
+        scrivi2();        
+    }
+    var ss = 0;
+    function scrivi3(){
+        var ID = document.getElementById("testo4");
+        ID.insertAdjacentText("beforeEnd", temp.charAt(ss));
+        if (ss < temp.length - 1){
+           ss++;
+           setTimeout("scrivi3()", 30);
+        }else{
+        	inizio1();
+        }
+    }
+    function inizio3(){
+        var ID = document.getElementById("testo4");
+        temp = "The life of the earth is in your hands. Take the weapons available to destroy the meteorites and the spaceship that will try to kill you.";
+        scrivi3();
+        document.getElementById('slideSource').style.opacity='1';        
+    }
+  </script>
 </body>
 </html>

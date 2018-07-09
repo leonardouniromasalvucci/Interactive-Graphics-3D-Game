@@ -1,0 +1,125 @@
+<html>
+
+  <head>
+    <title>Save The Earth</title>
+    <style>
+      body { margin: 0; background-color: black;}
+      canvas { width: 100%; height: 100% }
+      #bb{
+        float:left;width:40px;height:40px;cursor:pointer;border: 1.7px solid white;border-radius:5px;color:#004C99;text-align: center;vertical-align: middle;line-height: 40px;background-color: white;
+      }
+      #bb:hover{
+        color:#004C99;
+        background-color: white;
+
+      }
+      #bbs{
+        float:left;width:40px;margin-right:10px;height:40px;cursor:pointer;border: 1.7px solid white;border-radius:5px;color:#3399FF;text-align: center;vertical-align: middle;line-height: 40px;
+      }
+      #bb1{
+        margin-left:10px;float:left;width:40px;height:40px;cursor:pointer;border: 1.7px solid white;border-radius:5px;color:white;text-align: center;vertical-align: middle;line-height: 40px;display:none;
+      }
+      #bb1:hover{
+        color:#004C99;
+        background-color: white;
+      }
+      #bb2{
+        margin-left:10px;float:left;width:40px;height:40px;cursor:pointer;border: 1.7px solid white;border-radius:5px;color:white;text-align: center;vertical-align: middle;line-height: 40px;display:none;
+      }
+      #bb2:hover{
+        color:#004C99;
+        background-color: white;
+      }
+      #life{
+        width:100%;
+        height:100%;
+        background-color: #004C99;
+
+      }
+      #life2{
+        width:100%;
+        height:100%;
+        background-color: #004C99;
+      }
+      #txx{
+      	color: white;
+      	font-style: italic;
+        font-weight: bold;  
+        font-size: 12px;  
+        position: absolute;
+        margin-top:2px;
+
+      }
+      #im1{
+       margin-left:20px;width:20px;height:20px;float:left;border-radius:5px;cursor:pointer;
+      }
+      #im2{
+        width:20px;height:20px;border-radius:5px;cursor:pointer;margin-top:1px;border: 2px solid red;
+      }
+      #Container{
+        display: none;
+      }
+      #modal{
+      	margin: auto;
+        position: relative;
+        text-align: center;
+        margin-top: 20%;
+        color: white;
+      	font-style: italic;
+        font-weight: bold;  
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body title="Save The Earth">  
+  <div id="modal">Loading... wait please</div>
+  <div id="Container">
+    <label style="position:absolute;color:white;top:2%;font-size:26px;left:90%;"><b id="times"></b></label>
+    <div style="position:absolute;top:2%;left:1%;">
+      <label style="color:white;float:left;"><b>Save The Earth</b></label>
+      <div style="width:200px;height:20px;">
+        <img id="im1"  onclick="play_game();" src="images/plays.png"/>
+        <img id="im2" onclick="stop_game();"src="images/stop.png"/>
+      </div>
+      <div style="border: 1.7px solid white;border-radius:3px;width:200px;height:20px;margin-top:7px;">    
+        <b id="txx">&nbsp;  Earth's life</b><div id="life"></div>               
+      </div>
+        <div style="border: 1.7px solid white;border-radius:3px;width:200px;height:20px;margin-top:7px;">    
+        <b id="txx">&nbsp; Robot's life</b><div id="life2"></div>               
+      </div>
+      <div style="margin-top:10px;">
+      	<div id="bbs" title="Shots"><b>0</b></div>
+
+        <div id="bb" title="Hands" onclick="hands();"><b>H</b>        
+        </div>
+        <div id="bb2" title="Bomb" onclick="bombs();"><b>C</b>         
+        </div>
+        <div id="bb1" title="Rifle" onclick="rifle();"><b>R</b>
+        </div>
+      </div>
+    </div>  
+  </div>  
+    <audio id="jolly" style="display: none;" src="sounds/get.mp3" controls>
+    <audio id="error" style="display: none;" src="sounds/error.mp3" controls>
+    <audio id="explo" style="display: none;" src="sounds/explo.mp3" controls>
+    <audio id="sparo" style="display: none;" src="sounds/sparos.mp3" controls>
+    <script>  
+      if(!window.WebGLRenderingContext) {
+        alert("webgl not supported, visit http://get.webgl.org");
+      }            
+      window.onload = function () {
+        setTimeout(function(){ 
+           document.getElementById('Container').style.display="block";
+           document.getElementById('modal').style.display="none";
+        }, 3000);
+      }
+    </script>
+    <script src="libraries/perlin.js"></script>
+    <script src="libraries/three.js"></script>
+    <script src="libraries/textures/Texture.js"></script>
+    <script src="libraries/Raycaster.js"></script>
+    <script src="libraries/OBJLoader.js"></script>
+    <script src="robot.js"></script>
+    <script src="my_first.js"></script>
+  </body>
+</html>
