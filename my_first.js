@@ -614,7 +614,7 @@ var animate = function(){
     sphere_explo.geometry.computeVertexNormals(); 
     sphere_explo.scale.set(start_explo,start_explo,start_explo);
     start_explo+=0.02;
-    if(start_explo>15){
+    if(start_explo>7){
       scene.remove(mesh);
       document.location.href = 'end.html';
     }
@@ -637,7 +637,7 @@ var animate = function(){
     sphere_explo.geometry.computeVertexNormals(); 
     sphere_explo.scale.set(start_explo1,start_explo1,start_explo1);
     start_explo1+=0.02;
-    if(start_explo1>15){
+    if(start_explo1>7){
       scene.remove(bob.model);
       document.location.href = 'end.html';
     }
