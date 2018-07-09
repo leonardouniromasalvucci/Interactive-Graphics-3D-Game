@@ -615,7 +615,6 @@ var animate = function(){
     sphere_explo.scale.set(start_explo,start_explo,start_explo);
     start_explo+=0.02;
     if(start_explo>5){
-      scene.remove(mesh);
       document.location.href = 'end.html';
     }
   }else if(game_over1){
@@ -638,7 +637,6 @@ var animate = function(){
     sphere_explo.scale.set(start_explo1,start_explo1,start_explo1);
     start_explo1+=0.02;
     if(start_explo1>5){
-      scene.remove(bob.model);
       document.location.href = 'end.html';
     }
   }else{   	
