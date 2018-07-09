@@ -587,8 +587,9 @@ function sp(){
 
 var ex_mesh, ruota=false,c=0.0, navicella_colpita=0, distruggi_navicella=false;
 var intersects, intersects1;
-var vector;
+var vector, stops=false;
 var animate = function(){
+ if(!stops){
    requestAnimationFrame(animate);
    vector = moon.getWorldPosition();
    pointLight.position.set(vector.x,vector.y,vector.z);
@@ -616,6 +617,7 @@ var animate = function(){
     start_explo+=0.02;
     if(start_explo>5){
       document.location.href = 'end.html';
+	    stops=true;
     }
   }else if(game_over1){
     if(!ex2){
@@ -638,6 +640,7 @@ var animate = function(){
     start_explo1+=0.02;
     if(start_explo1>5){
       document.location.href = 'end.html';
+	    stops=true;
     }
   }else{   	
 
@@ -968,6 +971,7 @@ var animate = function(){
   stats.end();*/
   
   renderer.render(scene, camera);
+ }
 }
 
 animate();
