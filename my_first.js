@@ -696,7 +696,7 @@ var animate = function(){
       if(life2<1){
         game_over1=true;
       }
-      life2-=15;
+      life2-=25;
       }
 
       if(ruota){      
