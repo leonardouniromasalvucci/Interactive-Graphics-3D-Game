@@ -614,12 +614,10 @@ var animate = function(){
     sphere_explo.geometry.computeVertexNormals(); 
     sphere_explo.scale.set(start_explo,start_explo,start_explo);
     start_explo+=0.02;
-
-    setTimeout(function(){ 
+    if(start_explo>15){
       scene.remove(mesh);
       document.location.href = 'end.html';
-      
-    }, 3000);
+    }
   }else if(game_over1){
     if(!ex2){
       camera.position.z = 10;
@@ -639,13 +637,11 @@ var animate = function(){
     sphere_explo.geometry.computeVertexNormals(); 
     sphere_explo.scale.set(start_explo1,start_explo1,start_explo1);
     start_explo1+=0.02;
-   
-    setTimeout(function(){ 
+    if(start_explo1>15){
       scene.remove(bob.model);
-      document.location.href = 'end.html';      
-    }, 3000);
-  }else{   
-  	
+      document.location.href = 'end.html';
+    }
+  }else{   	
 
     if(!distruggi_navicella){
       if(navicella.position.x>=60){verso=false;}else if(navicella.position.x<=-60){verso=true;}else{}
