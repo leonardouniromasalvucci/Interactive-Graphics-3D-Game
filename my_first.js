@@ -768,7 +768,7 @@ var animate = function(){
             	if(life<1){
                   game_over=true;
             	}
-           	 	life-=15;
+           	 	life-=5;
             }
     }
 
